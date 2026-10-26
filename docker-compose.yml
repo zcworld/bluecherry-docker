@@ -73,6 +73,20 @@ services:
     networks: [bluecherry_net]
     restart: always
 
+
+
+  ntpd:
+    image: cturra/ntp:latest
+    container_name: ntpd
+    restart: always
+    network_mode: host
+    environment:
+      - NTP_SERVERS=0.oceania.pool.ntp.org,1.oceania.pool.ntp.org,au.pool.ntp.org
+      - TZ=Australia/Adelaide
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+
 networks:
   bluecherry_net:
     name: bluecherry_net
